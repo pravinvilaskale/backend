@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose') 
 const app = express()
-const port = 3000
+require('dotenv').config();
 const {mogoUrl} = require('./keys')
 
 
