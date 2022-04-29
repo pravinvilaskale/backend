@@ -1,7 +1,6 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "postinstall": "npm run build",
@@ -19,5 +18,16 @@
     "mongoose": "^6.1.6",
     "nodemailer": "^6.7.3",
     "nodemon": "^2.0.15"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pravinvilaskale/backend.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/pravinvilaskale/backend/issues"
+  },
+  "homepage": "https://github.com/pravinvilaskale/backend#readme",
+  "description": ""
 }
