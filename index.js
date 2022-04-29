@@ -38,6 +38,4 @@ app.get('/',auth,(req,res)=>{
     res.send("Your email is "+req.user.email)
 })
 
-app.listen(port, () => {
-    console.log("server running" + port);
-})
+app.listen(process.env.PORT || 5000)
