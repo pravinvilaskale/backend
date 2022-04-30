@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "npm run build",
+    "build": "./node_modules/.bin/webpack --config webpack.conf.js",
     "start": "node server.js"
   },
   "author": "",
