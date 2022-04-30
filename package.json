@@ -39,6 +39,10 @@
   "bugs": {
     "url": "https://github.com/pravinvilaskale/backend/issues"
   },
+  "engines": {
+    "node": "14.x",
+    "npm":"7.11.2"
+  },
   "homepage": "https://github.com/pravinvilaskale/backend#readme",
   "description": "My webpack project"
 }
