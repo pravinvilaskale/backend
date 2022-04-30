@@ -1,11 +1,15 @@
 {
-  "name": "backend",
+  "name": "my-webpack-project",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "postinstall": "npm run build",
-    "build": "./node_modules/.bin/webpack --config webpack.conf.js",
-    "start": "node server.js"
+    "build": "webpack --mode=production --node-env=production",
+    "start": "node server.js",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "watch": "webpack --watch",
+    "serve": "webpack serve"
   },
   "author": "",
   "license": "ISC",
@@ -20,7 +24,11 @@
     "nodemailer": "^6.7.3",
     "nodemon": "^2.0.15"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@webpack-cli/generators": "^2.4.2",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pravinvilaskale/backend.git"
@@ -30,5 +38,5 @@
     "url": "https://github.com/pravinvilaskale/backend/issues"
   },
   "homepage": "https://github.com/pravinvilaskale/backend#readme",
-  "description": ""
+  "description": "My webpack project"
 }
