@@ -5,7 +5,9 @@ const app = express()
 const {mogoUrl} = require('./keys')
 
 
+require('./models/Bill')
 require('./models/User')
+require('./models/Products')
 const routes = require('./routes/routes')
 const auth = require('./middleware/auth')
 

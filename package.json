@@ -24,6 +24,7 @@
     "mongoose": "^6.1.6",
     "nodemailer": "^6.7.3",
     "nodemon": "^2.0.15",
+    "react-native-paper": "^4.12.1",
     "workbox-webpack-plugin": "^6.5.3"
   },
   "devDependencies": {
@@ -41,7 +42,7 @@
   },
   "engines": {
     "node": "16.13.1",
-    "npm":"7.11.2"
+    "npm": "7.11.2"
   },
   "homepage": "https://github.com/pravinvilaskale/backend#readme",
   "description": "My webpack project"

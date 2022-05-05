@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken')
 const { jwtkey } = require('../keys')
 const router = express.Router();
 const User = mongoose.model('User');
+const Products = mongoose.model('Products');
+const Bill = mongoose.model('Bill');
 let session = require('express-session')
 const nodemailer = require("nodemailer");
 
@@ -115,8 +117,126 @@ router.post('/otp',async(req,res)=>{
     }
 })
 
+
+router.post('/bill', async (req, res) => {
+    console.log(req.body)
+})
+
+
+//find data is into cart in Bill Collections
+router.post('/finddata', async (req, res) => {
+    const { email } = req.body;
+    try {
+        const billdata = await Bill.findOne({ email })
+        //res.send(billdata)
+        if(billdata)
+        {
+            res.send({msg:"Found"})
+        }
+        else
+        {
+            res.send({ msg: "Nothing" })
+        }
+    }
+    catch (err) {
+        res.send(err);
+    }
+})
+
+//sendbill
+router.post('/sendbill', async (req, res) => {
+    const { email } = req.body;
+    try {
+        const billdata = await Bill.find({ email })
+        //res.send(billdata)
+        if (billdata) {
+            res.send({billdata})
+        }
+        else {
+            res.send({billdata})
+        }
+    }
+    catch (err) {
+        res.send(err);
+    }
+})
+
+//after QR scan
+router.post('/findproducts', async (req, res) => {
+    const { productcode } = req.body;
+    try {
+        const products = await Products.findOne({ productcode })
+        res.send(products)
+    }
+    catch (err) {
+        res.send(err);
+    }
+})
+
+//this routes for admin to add products
+router.post('/addproducts', async(req, res) => {
+    const { productcode, productname, productprice} = req.body;
+    try {
+        const products = new Products({ productcode,productname,productprice });
+        console.log(products)
+        const newproduct = await products.save();
+        console.log(newproduct)
+    }
+    catch(err)
+    {
+        res.send(err);
+    }
+})
+
+router.post('/addbill', async (req, res) => {
+
+    const { email, productcode, productname, productprice, productweight } = req.body;
+
+    try {
+        Bill.find({ $and: [{ 'email': email }, { 'productcode': productcode }] }, function (err, user) {
+            if (err) {
+                res.send(err);
+            }
+
+            const check = JSON.stringify(user);
+            if(check=="[]")
+            {
+                //insert
+                const data = new Bill({'email':email,'productcode':productcode,'productname':productname,'productprice':productprice,'productweight':productweight})
+                data.save(function (err, results) {
+                    console.log(results._id);
+                });
+            }
+            else
+            {
+                //update
+                const oldprice = user[0].productprice;
+                const oldweight = user[0].productweight;
+                //console.log(oldprice+" "+oldweight)
+                const bill = Bill.findOneAndUpdate({ 'email': email, 'productcode': productcode}, { 'productweight': productweight+oldweight,'productprice':productprice+oldprice }, function (err, response) {
+                    if (err) {
+                        console.log(err)
+                        return res.status(500).json({
+                            error: 'Error update update user\'s data'
+                        });
+                    } else {
+                        res.send({msg:"success"});
+                    }
+                })
+
+
+            }
+
+        });
+        
+    }
+    catch (err) {
+        res.send(err);
+    }
+})
+
 router.get('/',(req,res)=>{
-    res.send("Hello");
+    res.send("Hello World");
 })
 
 module.exports = router
